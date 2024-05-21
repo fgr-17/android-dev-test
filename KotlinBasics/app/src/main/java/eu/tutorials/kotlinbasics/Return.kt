@@ -1,7 +1,13 @@
 package eu.tutorials.kotlinbasics
 
 fun main() {
-    println("3 + 5 = " + add(3, 5))
+
+    println("Enter first integer:")
+    val num1 = readln().toInt()
+    println("Enter second integer:")
+    val num2 = readln().toInt()
+
+    println("$num1 + $num2 = " + add(num1, num2))
 }
 
 
