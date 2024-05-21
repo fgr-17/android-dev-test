@@ -17,4 +17,7 @@ fun main() {
     println(shoppingList2)
     shoppingList2.add(0, "RAM 64")
     println(shoppingList2)
+    println("Showing item 3: ${shoppingList2[3]}")
+    shoppingList2[3] = "RAM 128"
+    println(shoppingList2)
 }
