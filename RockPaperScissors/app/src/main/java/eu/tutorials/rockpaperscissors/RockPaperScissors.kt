@@ -6,10 +6,23 @@ fun main() {
     var playerChoice = ""
 
     println("Rock, Paper or Scissors? Enter your choice!")
-    playerChoice = readln()
+
+    var validInput : Boolean = false
+    while(!validInput) {
+        playerChoice = readln()
+        if (playerChoice == "Rock" || playerChoice == "Paper" || playerChoice == "Scissors" ||
+            playerChoice == "rock" || playerChoice == "paper" || playerChoice == "scissors") {
+            validInput = true
+        }
+        else {
+            println("Please enter rock, paper or scissors")
+        }
+    }
+
+
+
 
     val randomNumber = (1..3).random()
-
     when(randomNumber) {
         1 -> computerChoice = "Rock"
         2 -> computerChoice = "Paper"
