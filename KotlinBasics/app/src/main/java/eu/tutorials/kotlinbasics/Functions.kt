@@ -3,6 +3,14 @@ package eu.tutorials.kotlinbasics
 fun main(){
 
     // Call Function
+    println("Who is this coffee for?")
+    val name = readln()
+    println("How many pieces of sugar do you want?")
+    val sugarCount = readln()
+    val sugarCountInt = sugarCount.toInt()
+
+    makeCoffee(sugarCountInt, name)
+
     makeCoffee(1, "fede")
     makeCoffee(2, "pepe")
     makeCoffee(30, "Santino")
