@@ -15,4 +15,6 @@ fun main() {
     // removing by index
     shoppingList2.removeAt(2)
     println(shoppingList2)
+    shoppingList2.add(0, "RAM 64")
+    println(shoppingList2)
 }
