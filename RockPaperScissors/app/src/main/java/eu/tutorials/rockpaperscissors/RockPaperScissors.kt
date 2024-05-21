@@ -9,9 +9,8 @@ fun main() {
 
     var validInput : Boolean = false
     while(!validInput) {
-        playerChoice = readln()
-        if (playerChoice == "Rock" || playerChoice == "Paper" || playerChoice == "Scissors" ||
-            playerChoice == "rock" || playerChoice == "paper" || playerChoice == "scissors") {
+        playerChoice = readln().lowercase()
+        if (playerChoice == "rock" || playerChoice == "paper" || playerChoice == "scissors") {
             validInput = true
         }
         else {
