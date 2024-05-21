@@ -1,7 +1,19 @@
 package eu.tutorials.kotlinbasics
 
+data class CoffeeDetails(
+    val sugarCount: Int,
+    val name: String,
+    val size: String,
+    val creamAmount: Int
+)
+
 fun main(){
 
+    var coffeForDenis = CoffeeDetails(1, "denis", "xxl", 0)
+
+    makeCoffee(coffeForDenis)
+
+/*
     // Call Function
     println("Who is this coffee for?")
     val name = readln()
@@ -15,19 +27,19 @@ fun main(){
     makeCoffee(2, "pepe")
     makeCoffee(30, "Santino")
     makeCoffee(0, "pepito")
-    makeCoffee(-1, "esculapio")
+    makeCoffee(-1, "esculapio")*/
 }
 
 // Define Function
-fun makeCoffee(sugarCount:Int, name:String){
-    if ( sugarCount == 1 ) {
-        println("Coffee with 1 spoon of sugar for $name")
+fun makeCoffee(coffeeDetails: CoffeeDetails){
+    if ( coffeeDetails.sugarCount == 1 ) {
+        println("Coffee with 1 spoon of sugar for ${coffeeDetails.name} and cream: ${coffeeDetails.creamAmount}")
     }
-    else if (sugarCount == 0) {
-        println("Coffee with no sugar for $name")
+    else if (coffeeDetails.sugarCount == 0) {
+        println("Coffee with no sugar for ${coffeeDetails.name} and cream: ${coffeeDetails.creamAmount}")
     }
     else {
-        println("Coffee with $sugarCount spoons of sugar for $name")
+        println("Coffee with ${coffeeDetails.sugarCount} spoons of sugar for ${coffeeDetails.name} and cream: ${coffeeDetails.creamAmount}")
     }
 }
 
