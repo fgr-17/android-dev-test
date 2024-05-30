@@ -42,7 +42,7 @@ fun iterateList(fruitsList: List<String>) {
     }
 
     println("Iterate using .. for range")
-    for(item in 0 .. fruitsList.size - 1) {
+    for(item in 0 ..fruitsList.size - 1) {
         println("fruit[${item}] : ${fruitsList[item]}")
     }
 }
