@@ -21,4 +21,14 @@ fun main() {
     shoppingList2[3] = "RAM 128"
     shoppingList2.set(0, "RAM 1TB")
     println(shoppingList2)
+
+    val searchKey = "RAM 128"
+    val hasRam = shoppingList2.contains(searchKey)
+
+    if(hasRam) {
+        println("Has ${searchKey} on the list")
+    }
+    else {
+        println("No ${searchKey} in the list")
+    }
 }
