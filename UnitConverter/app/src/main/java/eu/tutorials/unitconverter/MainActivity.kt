@@ -6,7 +6,9 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -32,17 +34,15 @@ class MainActivity : ComponentActivity() {
 }
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun UnitConverter() {
     Column {
-        // Stacked UI elements
-        Greeting("Android C1")
-        Greeting("Android C2")
-        Row {
-            Greeting("Android R1")
-            Greeting("Android R2")
-        }
-
+        Text("Unit Converter")
+        
+        OutlinedTextField(value = "", onValueChange = {
+            // what happens when it changes
+        })
     }
 }
 
