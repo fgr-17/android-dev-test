@@ -43,6 +43,10 @@ fun UnitConverter() {
         OutlinedTextField(value = "", onValueChange = {
             // what happens when it changes
         })
+        Row {
+
+        }
+        Text("Result:")
     }
 }
 
@@ -56,8 +60,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
-    UnitConverterTheme {
-        Greeting("Android")
-    }
+fun UnitConverterPreview() {
+    UnitConverter()
 }
