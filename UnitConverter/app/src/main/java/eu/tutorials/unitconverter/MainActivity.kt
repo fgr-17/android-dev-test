@@ -77,7 +77,8 @@ fun UnitConverter() {
                 }
             }
         }
-        Text("Result:")
+        /*Spacer(modifier = Modifier.height(16.dp))*/
+        Text("Result:", modifier = Modifier.padding(20.dp))
     }
 }
 
