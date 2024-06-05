@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "eu.tutorials.captaingame"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "eu.tutorials.captaingame"
