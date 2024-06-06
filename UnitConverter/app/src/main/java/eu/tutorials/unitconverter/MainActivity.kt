@@ -1,7 +1,6 @@
 package eu.tutorials.unitconverter
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
@@ -25,12 +24,16 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import eu.tutorials.unitconverter.ui.theme.UnitConverterTheme
 import androidx.compose.ui.unit.dp
+import androidx.compose.runtime.setValue
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,6 +56,15 @@ class MainActivity : ComponentActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun UnitConverter() {
+
+    var inputValue by remember { mutableStateOf("") }
+    var outputValue by remember { mutableStateOf("") }
+    var inputUnity by remember { mutableStateOf("Centimeters") }
+    var outputUnity by remember { mutableStateOf("Meters") }
+    var iExpanded by remember { mutableStateOf(false) }
+    var oExpanded by remember { mutableStateOf(false) }
+    val conversionFactor = remember { mutableStateOf (0.01)}
+
     Column (
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -60,17 +72,21 @@ fun UnitConverter() {
         ){
         Text("Unit Converter", modifier = Modifier.padding(20.dp))
         Spacer(modifier = Modifier.height(16.dp))
-        OutlinedTextField(value = "", onValueChange = {
-            // what happens when it changes
-        })
+        OutlinedTextField(value = inputValue, onValueChange = {
+            inputValue = it
+        },
+            label = { Text(text = "Enter")}
+        )
         Row {
             val context = LocalContext.current
+            // Input box
             Box {
-                Button(onClick = { /*TODO*/ }) {
-                    Text(text = "Select")
+                // Input button
+                Button(onClick = { iExpanded = true }) {
+                    Text(text = "Select 1")
                     Icon(Icons.Default.ArrowDropDown,
                         contentDescription = "Arrow Down")
-                    DropdownMenu(expanded = false, onDismissRequest = { /*TODO*/ }) {
+                    DropdownMenu(expanded = iExpanded, onDismissRequest = { iExpanded = false}) {
                         DropdownMenuItem(
                             text = { Text(text = "Centimeter") },
                             onClick = { /*TODO*/ })
@@ -81,7 +97,7 @@ fun UnitConverter() {
                             text = { Text(text = "Feet") },
                             onClick = { /*TODO*/ })
                         DropdownMenuItem(
-                            text = { Text(text = "Milimeters") },
+                            text = { Text(text = "Millimeters") },
                             onClick = { /*TODO*/ })
                     }
                 }
@@ -89,11 +105,12 @@ fun UnitConverter() {
             }
             Spacer(modifier = Modifier.width(10.dp))
             Box {
-                Button(onClick = { /*TODO*/ }) {
+                // Output button
+                Button(onClick = { oExpanded = true }) {
                     Text(text = "Select")
                     Icon(Icons.Default.ArrowDropDown,
                         contentDescription = "Arrow Down")
-                    DropdownMenu(expanded = true, onDismissRequest = { /*TODO*/ }) {
+                    DropdownMenu(expanded = oExpanded, onDismissRequest = { oExpanded = false }) {
                         DropdownMenuItem(
                             text = { Text(text = "Centimeter") },
                             onClick = { /*TODO*/ })
@@ -104,7 +121,7 @@ fun UnitConverter() {
                             text = { Text(text = "Feet") },
                             onClick = { /*TODO*/ })
                         DropdownMenuItem(
-                            text = { Text(text = "Milimeters") },
+                            text = { Text(text = "Millimeters") },
                             onClick = { /*TODO*/ })
                     }
                 }
@@ -114,15 +131,6 @@ fun UnitConverter() {
         Text("Result:", modifier = Modifier.padding(20.dp))
     }
 }
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
 @Preview(showBackground = true)
 @Composable
 fun UnitConverterPreview() {
