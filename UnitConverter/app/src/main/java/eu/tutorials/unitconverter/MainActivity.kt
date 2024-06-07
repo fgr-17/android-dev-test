@@ -34,7 +34,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import eu.tutorials.unitconverter.ui.theme.UnitConverterTheme
 import androidx.compose.ui.unit.dp
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontFamily
 import kotlin.math.roundToInt
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.unit.sp
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,6 +71,13 @@ fun UnitConverter() {
     val iConversionFactor = remember { mutableStateOf (1.00)}
     val oConversionFactor = remember { mutableStateOf (1.00)}
 
+    val customTextStyle = TextStyle(
+        fontFamily = FontFamily.Monospace,
+        fontSize = 32.sp,
+        color = Color.Red
+    )
+
+
     fun convertUnits() {
         val inputValueDouble = inputValue.toDoubleOrNull() ?: 0.0
         val result = (inputValueDouble * iConversionFactor.value * 100.0 / oConversionFactor.value).roundToInt() / 100.0
@@ -79,7 +90,8 @@ fun UnitConverter() {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
         ){
-        Text("Unit Converter", modifier = Modifier.padding(20.dp))
+        /*Text("Unit Converter", modifier = Modifier.padding(20.dp), style = MaterialTheme.typography.headlineLarge)*/
+        Text("Unit Converter", modifier = Modifier.padding(20.dp), style = customTextStyle)
         Spacer(modifier = Modifier.height(16.dp))
         OutlinedTextField(value = inputValue, onValueChange = {
             inputValue = it
@@ -176,8 +188,10 @@ fun UnitConverter() {
                 }
             }
         }
-        /*Spacer(modifier = Modifier.height(16.dp))*/
-        Text("Result: ${outputValue} Meters", modifier = Modifier.padding(20.dp))
+        Spacer(modifier = Modifier.height(16.dp))
+        /*Text("Result: ${outputValue} Meters", modifier = Modifier.padding(20.dp))*/
+
+        Text("Result: ${outputValue} Meters", style = MaterialTheme.typography.headlineMedium)
     }
 }
 @Preview(showBackground = true)
