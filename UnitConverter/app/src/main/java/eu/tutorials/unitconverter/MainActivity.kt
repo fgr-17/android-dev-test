@@ -59,8 +59,8 @@ fun UnitConverter() {
 
     var inputValue by remember { mutableStateOf("") }
     var outputValue by remember { mutableStateOf("") }
-    var inputUnity by remember { mutableStateOf("Centimeters") }
-    var outputUnity by remember { mutableStateOf("Meters") }
+    var inputUnit by remember { mutableStateOf("Centimeters") }
+    var outputUnit by remember { mutableStateOf("Meters") }
     var iExpanded by remember { mutableStateOf(false) }
     var oExpanded by remember { mutableStateOf(false) }
     val conversionFactor = remember { mutableStateOf (0.01)}
@@ -83,16 +83,24 @@ fun UnitConverter() {
             Box {
                 // Input button
                 Button(onClick = { iExpanded = true }) {
-                    Text(text = "Select 1")
+                    Text(text = "Select")
                     Icon(Icons.Default.ArrowDropDown,
                         contentDescription = "Arrow Down")
                     DropdownMenu(expanded = iExpanded, onDismissRequest = { iExpanded = false}) {
                         DropdownMenuItem(
                             text = { Text(text = "Centimeter") },
-                            onClick = { /*TODO*/ })
+                            onClick = {
+                                iExpanded = false
+                                inputUnit = "Centimeter"
+                                conversionFactor.value = 0.01
+                            })
                         DropdownMenuItem(
                             text = { Text(text = "Meter") },
-                            onClick = { /*TODO*/ })
+                            onClick = {
+                                iExpanded = false
+                                inputUnit = "Meter"
+                                conversionFactor.value = 1.0
+                            })
                         DropdownMenuItem(
                             text = { Text(text = "Feet") },
                             onClick = { /*TODO*/ })
