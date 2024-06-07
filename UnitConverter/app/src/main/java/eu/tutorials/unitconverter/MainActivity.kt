@@ -34,6 +34,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import eu.tutorials.unitconverter.ui.theme.UnitConverterTheme
 import androidx.compose.ui.unit.dp
 import androidx.compose.runtime.setValue
+import kotlin.math.roundToInt
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,11 +60,19 @@ fun UnitConverter() {
 
     var inputValue by remember { mutableStateOf("") }
     var outputValue by remember { mutableStateOf("") }
-    var inputUnit by remember { mutableStateOf("Centimeters") }
+    var inputUnit by remember { mutableStateOf("Meters") }
     var outputUnit by remember { mutableStateOf("Meters") }
     var iExpanded by remember { mutableStateOf(false) }
     var oExpanded by remember { mutableStateOf(false) }
-    val conversionFactor = remember { mutableStateOf (0.01)}
+    val iConversionFactor = remember { mutableStateOf (1.00)}
+    val oConversionFactor = remember { mutableStateOf (1.00)}
+
+    fun convertUnits() {
+        val inputValueDouble = inputValue.toDoubleOrNull() ?: 0.0
+        val result = (inputValueDouble * iConversionFactor.value * 100.0 / oConversionFactor.value).roundToInt() / 100.0
+        outputValue = result.toString()
+    }
+
 
     Column (
         modifier = Modifier.fillMaxSize(),
@@ -83,7 +92,7 @@ fun UnitConverter() {
             Box {
                 // Input button
                 Button(onClick = { iExpanded = true }) {
-                    Text(text = "Select")
+                    Text(text = inputUnit)
                     Icon(Icons.Default.ArrowDropDown,
                         contentDescription = "Arrow Down")
                     DropdownMenu(expanded = iExpanded, onDismissRequest = { iExpanded = false}) {
@@ -92,21 +101,33 @@ fun UnitConverter() {
                             onClick = {
                                 iExpanded = false
                                 inputUnit = "Centimeter"
-                                conversionFactor.value = 0.01
+                                iConversionFactor.value = 0.01
+                                convertUnits()
                             })
                         DropdownMenuItem(
                             text = { Text(text = "Meter") },
                             onClick = {
                                 iExpanded = false
                                 inputUnit = "Meter"
-                                conversionFactor.value = 1.0
+                                iConversionFactor.value = 1.0
+                                convertUnits()
                             })
                         DropdownMenuItem(
                             text = { Text(text = "Feet") },
-                            onClick = { /*TODO*/ })
+                            onClick = {
+                                iExpanded = false
+                                inputUnit = "Feet"
+                                iConversionFactor.value = 0.3048
+                                convertUnits()
+                            })
                         DropdownMenuItem(
                             text = { Text(text = "Millimeters") },
-                            onClick = { /*TODO*/ })
+                            onClick = {
+                                iExpanded = false
+                                inputUnit = "Millimeters"
+                                iConversionFactor.value = 0.001
+                                convertUnits()
+                            })
                     }
                 }
 
@@ -115,28 +136,48 @@ fun UnitConverter() {
             Box {
                 // Output button
                 Button(onClick = { oExpanded = true }) {
-                    Text(text = "Select")
+                    Text(text = outputUnit)
                     Icon(Icons.Default.ArrowDropDown,
                         contentDescription = "Arrow Down")
                     DropdownMenu(expanded = oExpanded, onDismissRequest = { oExpanded = false }) {
                         DropdownMenuItem(
                             text = { Text(text = "Centimeter") },
-                            onClick = { /*TODO*/ })
+                            onClick = {
+                                oExpanded = false
+                                outputUnit = "Centimeter"
+                                oConversionFactor.value = 0.01
+                                convertUnits()
+                            })
                         DropdownMenuItem(
                             text = { Text(text = "Meter") },
-                            onClick = { /*TODO*/ })
+                            onClick = {
+                                oExpanded = false
+                                outputUnit = "Meter"
+                                oConversionFactor.value = 1.00
+                                convertUnits()
+                            })
                         DropdownMenuItem(
                             text = { Text(text = "Feet") },
-                            onClick = { /*TODO*/ })
+                            onClick = {
+                                oExpanded = false
+                                outputUnit = "Feet"
+                                oConversionFactor.value = 0.3048
+                                convertUnits()
+                            })
                         DropdownMenuItem(
                             text = { Text(text = "Millimeters") },
-                            onClick = { /*TODO*/ })
+                            onClick = {
+                                oExpanded = false
+                                outputUnit = "Millimeters"
+                                oConversionFactor.value = 0.001
+                                convertUnits()
+                            })
                     }
                 }
             }
         }
         /*Spacer(modifier = Modifier.height(16.dp))*/
-        Text("Result:", modifier = Modifier.padding(20.dp))
+        Text("Result: ${outputValue} Meters", modifier = Modifier.padding(20.dp))
     }
 }
 @Preview(showBackground = true)
